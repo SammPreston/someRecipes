@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header id="navBar">
+        <div id="searchContainer">
+            <input type="text" placeholder="Search our Selection" id="userInput">
+            <button id="searchButn">Search</button>
+        </div>
+    </header>
+    <main>
+        <div id="results"></div>
+    </main>
+    
+    <script>
+
+
+            var searchBtn = document.getElementById("searchButn");
+            var url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+            
+            searchBtn.addEventListener("click", () => {
+                var userInp = document.getElementById("userInput").value;
+                var result = document.getElementById('results');
+                if (userInp.length == 0){
+                    result.innerHTML=`<h3> error</h3>`
+                    
+                }else{
+                    fetch(url + userInp)
+                    .then(res=>res.json())
+                    .then(data=> console.log(data.meals[0]))
+                }
+            }
+            )
+
+         // // searchBtn.addEventListener("click", () => {
+        // //     let userInp = document.getElementById("userInput").value;
+        // //     if (userInp.length == 0) {
+        // //         result.innerHTML = `<h3>Input Field Cannot Be Empty</h3>`;
+        // //         console.log(result);
+        // //     } else {
+        // //         fetch(url + userInp)
+        // //         .then((response) => response.json())
+        // //         .then((data) => {
+        // //             let myMeal = data.meals[0];
+        // //         console.log(myMeal);
+        // //         console.log(myMeal.strMealThumb);
+        // //         console.log(myMeal.strMeal);
+        // //         console.log(myMeal.strArea);
+        // //         console.log(myMeal.strInstructions);
+        // //         let count = 1;
+        // //         let ingredients = [];
+        // //         for (let i in myMeal) {
+        // //             let ingredient = "";
+        // //             let measure = "";
+        // //         if (i.startsWith("strIngredient") && myMeal[i]) {
+        // //             ingredient = myMeal[i];
+        // //             measure = myMeal[`strMeasure` + count];
+        // //             count += 1;
+        // //             ingredients.push(`${measure} ${ingredient}`);
+        // //         }
+        // //     }
+        // // console.log(ingredients);
+
+
+
+    </script>
+</body>
+</html>
