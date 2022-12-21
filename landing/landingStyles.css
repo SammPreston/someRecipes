@@ -1,1 +1,13 @@
-
+main{
+    margin:auto;
+    padding: 10px;
+    display:grid;
+    grid-template-columns: 20% 1fr;
+    border: 1px solid black;
+}
+aside>h4{
+    text-align: center;
+}
+#favBox{
+    border: 1px solid green;
+}
