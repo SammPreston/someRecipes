@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/landing/landingStyles.css">
     <title>Document</title>
 </head>
 <body>
@@ -13,6 +14,9 @@
             <button id="searchButn">Search</button>
         </div>
     </header>
+    <aside>
+
+    </aside>
     <main>
         <div id="results"></div>
     </main>
@@ -32,24 +36,27 @@
                 }else{
                     fetch(url + userInp)
                     .then((res)=> {return res.json()})    
-            .then((data)=>{
-            let meal = data.meals[0]
-            let info = "";       
-                 
+                    .then((data)=>{
+                        let meal = data.meals[0];
+                        let info = "";       
+                    
                 info += `
-                    <div> 
-                    <img src=${meal.strMealThumb} alt="photo" height="200" width="200">
-                    <h1>${meal.strMeal}</h1>
+                    <div id="recipeBox"> 
+                    <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
+                    <h1 class="title">${meal.strMeal}</h1>
                     <p>${meal.strIngredient1}</p> 
                     <p>${meal.strMeasure1}</p> 
                     <p>${meal.strInstructions}</p>
-                    <button type="button">Add to favorite</button>
+                    <button type="favButton" id="button">Add to favorite</button>
+                    <button type="clrButton" id="button">Clear</button>
                     </div>
                     `
                     result.innerHTML = info;
             })}
         })
-            .catch_((err)=>console.log(err))
+            .catch_(()=>
+            results.innerHTML=`<h3>Invalid Input</h3>`)
+
 
          
     </script>
