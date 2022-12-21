@@ -14,10 +14,13 @@
             <button id="searchButn">Search</button>
         </div>
     </header>
-    <aside>
+    
+  
 
-    </aside>
     <main>
+        <aside>
+            <h4>Favorites</h4>
+        </aside>
         <div id="results"></div>
     </main>
     
@@ -40,23 +43,50 @@
                         let meal = data.meals[0];
                         let info = "";       
                     
-                info += `
-                    <div id="recipeBox"> 
-                    <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
-                    <h1 class="title">${meal.strMeal}</h1>
-                    <p>${meal.strIngredient1}</p> 
-                    <p>${meal.strMeasure1}</p> 
-                    <p>${meal.strInstructions}</p>
-                    <button type="favButton" id="button">Add to favorite</button>
-                    <button type="clrButton" id="button">Clear</button>
-                    </div>
-                    `
-                    result.innerHTML = info;
-            })}
-        })
-            .catch_(()=>
-            results.innerHTML=`<h3>Invalid Input</h3>`)
+                        info += `
+                        <div id="recipeBox"> 
+                        <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
+                        <h1 class="title">${meal.strMeal}</h1>
+                        <p>${meal.strIngredient1}</p> 
+                        <p>${meal.strMeasure1}</p> 
+                        <p>${meal.strInstructions}</p>
+                        <button type="button" id="favbutton" >Add to favorite</button>
+                        </div>
+                        `
+                        result.innerHTML = info;
 
+                        var favbutton = document.getElementById('favbutton').addEventListener("click",() =>{
+                                window.localStorage.setItem('recipe', meal.strMeal).addEventListener("click", updateAside());
+                            
+                                console.log(data.meals[0]);
+                                let recipeTitle = data.meals[0].strMeal;
+                            
+                                
+                            
+                                function updateAside(){
+                                    var values = [], keys = Objects.keys(localStorage), i = keys.length;
+                                    while (i--) {values.push(localStorage.getItem(keys[i]) ); }
+                                    var aside = document.getElementsByTagName('aside');
+                                
+                                    let favList = "";
+                                    favList+=`
+                                    <div id="favBox">
+                                    `
+                            }
+                            
+                        });
+                    })
+                    .catch(()=>
+                    results.innerHTML=`<h3>Invalid Input</h3>`)
+                }
+            
+            
+            
+            })
+            
+
+            
+            
 
          
     </script>
