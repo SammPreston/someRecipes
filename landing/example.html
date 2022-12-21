@@ -19,25 +19,48 @@
     
     <script>
 
-
             var searchBtn = document.getElementById("searchButn");
             var url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+            var result = document.getElementById('results');
+
             
             searchBtn.addEventListener("click", () => {
                 var userInp = document.getElementById("userInput").value;
-                var result = document.getElementById('results');
                 if (userInp.length == 0){
                     result.innerHTML=`<h3> error</h3>`
                     
                 }else{
                     fetch(url + userInp)
-                    .then(res=>res.json())
-                    .then(data=> console.log(data.meals[0]))
-                }
-            }
-            )
+                    .then((res)=> {return res.json()})    
+            .then((data)=>{
+            let meal = data.meals[0]
+            let info = "";       
+                 
+                info += `
+                    <div> 
+                    <img src=${meal.strMealThumb} alt="photo" height="200" width="200">
+                    <h1>${meal.strMeal}</h1>
+                    <p>${meal.strIngredient1}</p> 
+                    <p>${meal.strMeasure1}</p> 
+                    <p>${meal.strInstructions}</p>
+                    <button type="button">Add to favorite</button>
+                    </div>
+                    `
+                    result.innerHTML = info;
+            })}
+        })
+            .catch_((err)=>console.log(err))
 
 
+            // ingredient comes in console. need to assign in info p tag
+            let count = 1
+            let ingredient = "";
+            let measure = "";  
+            for (let i in meal) {         
+            if (i.startsWith("strIngredient")) {
+            ingredient = meal["strIngredient" + count];             
+            count += 1;
+            console.log(ingredient)}}
     </script>
 </body>
 </html>
