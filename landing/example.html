@@ -53,14 +53,19 @@
 
 
             // ingredient comes in console. need to assign in info p tag
-            let count = 1
-            let ingredient = "";
-            let measure = "";  
-            for (let i in meal) {         
-            if (i.startsWith("strIngredient")) {
-            ingredient = meal["strIngredient" + count];             
+            let count = 1;
+        let ingredients = [];
+        for (let i in meals) {
+          let ingredient = "";
+          let measure = "";
+          if (i.startsWith("strIngredient") && meals[i]) {
+            ingredient = meals[i];
+            measure = meals[`strMeasure` + count];
             count += 1;
-            console.log(ingredient)}}
+            ingredients.push(`${measure} ${ingredient}`);
+          }
+        }
+        console.log(ingredients);
     </script>
 </body>
 </html>
