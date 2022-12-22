@@ -12,6 +12,8 @@
         <div id="searchContainer">
             <input type="text" placeholder="Search our Selection" id="userInput">
             <button id="searchButn">Search</button>
+            <input type="text" id="commentInp" placeholder="Please Enter your comment">
+            <button id="commentBtn">Share</button>
         </div>
     </header>
     
@@ -19,10 +21,14 @@
 
     <main>
         <aside>
-            <h4>Favorites</h4>
+            <h1>Favorites</h1>
         </aside>
         <div id="results"></div>
+<!---button moved here--->
+
         <button type="button" id="favbutton"  >Add to favorite</button>
+
+
     </main>
     
     <script>
@@ -43,6 +49,7 @@
                     let meal = data.meals[0];
                     let info = "";           
                         info += `
+
                             <div id="recipeBox"> 
                             <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
                             <h1 class="title">${meal.strMeal}</h1>
@@ -51,6 +58,19 @@
                             </div> 
                             `
                     result.innerHTML = info;
+
+                        <div id="recipeBox"> 
+                        <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
+                        <h1 class="title">${meal.strMeal}</h1>
+                        <ul>  </ul>
+                        <p>${meal.strInstructions}</p>
+                        <button type="button" id="favbutton" >Add to favorite</button>                       
+                        <div id="comments">COMMENTS</div>
+                        <div id= "place"> </div>
+                        </div>
+                        `
+                        result.innerHTML = info;
+
                     
                     // INGREDIENTS PART
                     let ingredient = []
@@ -91,6 +111,22 @@
                                     
                                 //    console.log(values)
                                 // }
+
+                                console.log(data.meals[0]);
+                                let recipeTitle = data.meals[0].strMeal;                         
+                                
+                            
+                                function updateAside(){
+                                    var values = [], keys = Objects.keys(localStorage), i = keys.length;
+                                    while (i--) {values.push(localStorage.getItem(keys[i]) ); }
+                                    var aside = document.getElementsByTagName('aside');
+                                
+                                    let favList = "";
+                                    favList+=`
+                                    <div id="favBox">
+                                    `
+                            }
+
                             
                         });
                 })
@@ -99,8 +135,35 @@
    
         }).catch(()=>
                     results.innerHTML=`<h3>Invalid Input</h3>`)
+
             
 
+                }
+            
+                  
+
+            
+            })
+            
+            //COMMENT FUNCTION   
+
+            
+            var commentBtn= document.getElementById("commentBtn");
+                commentBtn.addEventListener("click", function(){
+                var commentBoxValue= document.getElementById("commentInp").value; 
+                var p = document.createElement("p");
+                var text = document.createTextNode(commentBoxValue);
+                p.appendChild(text);
+                document.getElementById("comments").appendChild(p);
+
+
+
+
+            })
+
+
+            
+            
          
     </script>
 </body>
