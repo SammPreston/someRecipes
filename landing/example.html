@@ -33,7 +33,7 @@
             var url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
             var result = document.getElementById('results');
 
-            
+
             searchBtn.addEventListener("click", () => {
                 var userInp = document.getElementById("userInput").value;
                 if (userInp.length == 0){
@@ -52,12 +52,17 @@
                         <h1 class="title">${meal.strMeal}</h1>
                         <ul>  </ul>
                         <p>${meal.strInstructions}</p>
-                        <button type="button" id="favbutton" >Add to favorite</button>                       
+                        <button type="button" id="favbutton" >Add to favorite</button>         
+                        <div id="button"></div>
+                        <div id="inputComment"</div>              
                         <div id="comments">COMMENTS</div>
-                        <div id= "place"> </div>
-                        </div>
+                       
                         `
                         result.innerHTML = info;
+
+                        // comment input and button place
+                        document.getElementById("inputComment").appendChild(commentInp)
+                        document.getElementById("button").appendChild(commentBtn)
                     
                         // INGREDIENTS PART
                     let ingredient = []
@@ -115,17 +120,14 @@
             
             })
             
-            //COMMENT FUNCTION   
-
-            
+            //COMMENT FUNCTION               
             var commentBtn= document.getElementById("commentBtn");
                 commentBtn.addEventListener("click", function(){
                 var commentBoxValue= document.getElementById("commentInp").value; 
                 var p = document.createElement("p");
                 var text = document.createTextNode(commentBoxValue);
                 p.appendChild(text);
-                document.getElementById("comments").appendChild(p);
-
+                document.getElementById("comments").appendChild(p);               
 
 
             })
