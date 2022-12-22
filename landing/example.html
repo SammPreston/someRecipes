@@ -111,7 +111,36 @@
                         document.querySelector("ul").appendChild(list)
                     })
 
-                    // LOCAL STORAGE
+                    
+                })
+       
+            }
+   
+        }).catch(()=>
+                    results.innerHTML=`<h3>Invalid Input</h3>`)
+
+            
+
+                }
+            
+                  
+
+            
+            })
+            
+            //COMMENT FUNCTION               
+            var commentBtn= document.getElementById("commentBtn");
+                commentBtn.addEventListener("click", function(){
+                var commentBoxValue= document.getElementById("commentInp").value; 
+                var p = document.createElement("p");
+                var text = document.createTextNode(commentBoxValue);
+                p.appendChild(text);
+                document.getElementById("comments").appendChild(p);               
+
+
+
+            })
+// LOCAL STORAGE
 
                     var favbutton = document.getElementById('favbutton').addEventListener("click",() =>{
                             window.localStorage.setItem('recipe', meal.strMeal);
@@ -147,35 +176,6 @@
 
                             
                         });
-                })
-       
-            }
-   
-        }).catch(()=>
-                    results.innerHTML=`<h3>Invalid Input</h3>`)
-
-            
-
-                }
-            
-                  
-
-            
-            })
-            
-            //COMMENT FUNCTION               
-            var commentBtn= document.getElementById("commentBtn");
-                commentBtn.addEventListener("click", function(){
-                var commentBoxValue= document.getElementById("commentInp").value; 
-                var p = document.createElement("p");
-                var text = document.createTextNode(commentBoxValue);
-                p.appendChild(text);
-                document.getElementById("comments").appendChild(p);               
-
-
-
-            })
-
 
             
             

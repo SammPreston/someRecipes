@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/landing/landingStyles.css">
+    <script src="/landing/landing.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
   
 
     <main>
-        <aside>
+        <aside id="favList">
             <h1>Favorites</h1>
         </aside>
         <div id="results"></div>
@@ -52,7 +53,7 @@
                         <h1 class="title">${meal.strMeal}</h1>
                         <ul>  </ul>
                         <p>${meal.strInstructions}</p>
-                        <button type="button" id="favbutton" >Add to favorite</button>         
+                        <button type="button" id="favbutton" onclick="saveRecipe()" >Add to favorite</button>         
                         <div id="button"></div>
                         <div id="inputComment"</div>              
                         <div id="comments">COMMENTS</div>
@@ -86,27 +87,9 @@
                         document.querySelector("ul").appendChild(list)
                      })
 
+                   
 
-                     // LOCAL STORAGE
-                        var favbutton = document.getElementById('favbutton').addEventListener("click",() =>{
-                                window.localStorage.setItem('recipe', meal.strMeal).addEventListener("click", updateAside());
-                            
-                                console.log(data.meals[0]);
-                                let recipeTitle = data.meals[0].strMeal;                         
-                                
-                            
-                                function updateAside(){
-                                    var values = [], keys = Objects.keys(localStorage), i = keys.length;
-                                    while (i--) {values.push(localStorage.getItem(keys[i]) ); }
-                                    var aside = document.getElementsByTagName('aside');
-                                
-                                    let favList = "";
-                                    favList+=`
-                                    <div id="favBox">
-                                    `
-                            }
-                            
-                        });
+                    
                         
                     })
                     
@@ -132,7 +115,7 @@
 
             })
 
-
+           
             
             
          
