@@ -24,14 +24,18 @@
             <h1>Favorites</h1>
         </aside>
         <div id="results"></div>
+<!---button moved here--->
+
+        <button type="button" id="favbutton"  >Add to favorite</button>
+
 
     </main>
     
     <script>
 
-            var searchBtn = document.getElementById("searchButn");
-            var url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-            var result = document.getElementById('results');
+        var searchBtn = document.getElementById("searchButn");
+        var url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+        var result = document.getElementById('results');
 
 
             searchBtn.addEventListener("click", () => {
@@ -46,7 +50,28 @@
                         let meal = data.meals[0];
                         let info = "";       
                     
+            
+        searchBtn.addEventListener("click", () => {
+            var userInp = document.getElementById("userInput").value;
+            if (userInp.length == 0){
+                result.innerHTML=`<h3>Please Enter a Valid Name</h3>`
+            }else{
+                fetch(url + userInp)
+                .then((res)=> {return res.json()})    
+                .then((data)=>{
+                    let meal = data.meals[0];
+                    let info = "";           
                         info += `
+
+                            <div id="recipeBox"> 
+                            <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
+                            <h1 class="title">${meal.strMeal}</h1>
+                            <ul>  </ul>
+                            <p>${meal.strInstructions}</p>
+                            </div> 
+                            `
+                    result.innerHTML = info;
+
                         <div id="recipeBox"> 
                         <img src=${meal.strMealThumb} alt="photo" class="img" height="200" width="200">
                         <h1 class="title">${meal.strMeal}</h1>
@@ -63,34 +88,48 @@
                         // comment input and button place
                         document.getElementById("inputComment").appendChild(commentInp)
                         document.getElementById("button").appendChild(commentBtn)
+
                     
-                        // INGREDIENTS PART
+                    // INGREDIENTS PART
                     let ingredient = []
                     let count = 1
                     let ing = ""
                     let mes = ""
                     for(i in meal){                    
-                     if(i.startsWith("strIngredient") && meal[i]){
-                     ing = meal[`strIngredient` + count];
-                     mes = meal[`strMeasure` + count];
-                     count += 1;
-                     ingredient.push(`${mes} ${ing}`)
-                     console.log(ingredient)                
-                                                        
-                        
-        }
-       }            // INGREDIENT LIST PART
-                        ingredient.forEach((i)=>{
+                        if(i.startsWith("strIngredient") && meal[i]){
+                        ing = meal[`strIngredient` + count];
+                        mes = meal[`strMeasure` + count];
+                        count += 1;
+                        ingredient.push(`${mes} ${ing}`)
+                        console.log(ingredient)                
+                    }}            
+                    
+                    // INGREDIENT LIST PART
+                    ingredient.forEach((i)=>{
                         let list = document.createElement("li");
                         list.innerText = i
                         document.querySelector("ul").appendChild(list)
-                     })
+                    })
 
+                    // LOCAL STORAGE
 
-                     // LOCAL STORAGE
-                        var favbutton = document.getElementById('favbutton').addEventListener("click",() =>{
-                                window.localStorage.setItem('recipe', meal.strMeal).addEventListener("click", updateAside());
+                    var favbutton = document.getElementById('favbutton').addEventListener("click",() =>{
+                            window.localStorage.setItem('recipe', meal.strMeal);
                             
+                            console.log(data.meals[0]);
+                            let recipeTitle = data.meals[0].strMeal;                         
+                            console.log(recipeTitle)
+                            var values = [];
+                            values.push(recipeTitle);
+                            console.log(values);
+                                // function updateAside(){
+                                //     , keys = Objects.keys(localStorage), i = keys.length;
+                                //     while (i--) {values.push(localStorage.getItem(keys[i]) ); }
+                                //     var aside = document.getElementsByTagName('aside');
+                                    
+                                //    console.log(values)
+                                // }
+
                                 console.log(data.meals[0]);
                                 let recipeTitle = data.meals[0].strMeal;                         
                                 
@@ -105,14 +144,18 @@
                                     <div id="favBox">
                                     `
                             }
+
                             
                         });
-                        
-                    })
-                    
-                        
-                    .catch(()=>
+                })
+       
+            }
+   
+        }).catch(()=>
                     results.innerHTML=`<h3>Invalid Input</h3>`)
+
+            
+
                 }
             
                   
@@ -128,6 +171,7 @@
                 var text = document.createTextNode(commentBoxValue);
                 p.appendChild(text);
                 document.getElementById("comments").appendChild(p);               
+
 
 
             })
