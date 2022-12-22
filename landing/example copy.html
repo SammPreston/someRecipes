@@ -32,6 +32,13 @@
             var searchBtn = document.getElementById("searchButn");
             var url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
             var result = document.getElementById('results');
+        
+            var commentBtn= document.getElementById("commentBtn");
+            var commentInput = document.getElementById("commentInp")
+            var commentButton = document.getElementById("button")
+            commentBtn.style.display = 'none';
+            commentInput.style.display = 'none';
+          
 
 
             searchBtn.addEventListener("click", () => {
@@ -53,16 +60,18 @@
                         <ul>  </ul>
                         <p>${meal.strInstructions}</p>
                         <button type="button" id="favbutton" >Add to favorite</button>         
-                        <div id="button"></div>
-                        <div id="inputComment"</div>              
-                        <div id="comments">COMMENTS</div>
-                       
+                        <p id="button"></p>
+                        <p id="inputComment"</p>              
+                        <div id="comments">COMMENTS</div>                       
                         `
                         result.innerHTML = info;
 
                         // comment input and button place
-                        document.getElementById("inputComment").appendChild(commentInp)
-                        document.getElementById("button").appendChild(commentBtn)
+                        commentBtn.style.display = 'block';
+                        commentInput.style.display = 'block';
+                        inputComment.appendChild(commentInput)
+                        button.appendChild(commentBtn)
+
                     
                         // INGREDIENTS PART
                     let ingredient = []
@@ -121,7 +130,6 @@
             })
             
             //COMMENT FUNCTION               
-            var commentBtn= document.getElementById("commentBtn");
                 commentBtn.addEventListener("click", function(){
                 var commentBoxValue= document.getElementById("commentInp").value; 
                 var p = document.createElement("p");
